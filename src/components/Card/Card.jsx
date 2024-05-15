@@ -1,5 +1,7 @@
+import { WithRuBalance } from "../../helpers/hoc/WithRuBalance";
 import styles from "./styles.module.css";
-const Card = ({ balance, name, setBalance }) => {
+const Card = ({ balance, name, setBalance, ruBalance }) => {
+  console.log({ ruBalance });
   return (
     <div className={styles.card}>
       <div className={styles["card-block"]}>
@@ -18,4 +20,4 @@ const Card = ({ balance, name, setBalance }) => {
     </div>
   );
 };
-export default Card;
+export default WithRuBalance(Card);
