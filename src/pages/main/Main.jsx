@@ -4,13 +4,18 @@ import FilterBlock from "../../components/FilterBlock/FilterBlock";
 import Loading from "../../components/Loading/Loading";
 import styles from "./styles.module.css";
 
-const Main = ({ balance, setBalance, coins, filteredCoins, setCoins }) => {
+const Main = ({ balance, setBalance, coins, setCoins }) => {
+  // const filterExpensiveCoins = () => {
+  //   console.log("--func work");
+  //   return filteredCoins.filter((coin) => coin.price > 1000);
+  // };
+  // const expensiveCoins = useMemo(() => filterExpensiveCoins(), [filteredCoins]);
   return (
     <main className={styles.main}>
       <Card balance={balance} name={"Vlad Petlyuk"} setBalance={setBalance} />
-      <FilterBlock setCoins={setCoins} coins={coins} />
+      <FilterBlock setCoins={setCoins} />
       {coins.length > 0 ? (
-        <CoinsList coins={filteredCoins} />
+        <CoinsList />
       ) : (
         <Loading type={"bubbles"} color={"black"} />
       )}

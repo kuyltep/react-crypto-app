@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./styles.css";
+import { CoinsContext } from "../../context/coinsContext";
+import useFilteredCoins from "../../helpers/hooks/useFilteredCoins";
 
-const FilterBlock = ({ coins, setCoins }) => {
-  const [value, setValue] = useState("");
-  useEffect(() => {
-    const filteredCoins = coins.filter((coin) =>
-      coin.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setCoins(filteredCoins);
-  }, [value]);
+const FilterBlock = ({ setCoins }) => {
+  const { coins } = useContext(CoinsContext);
+  const { value, setValue } = useFilteredCoins(coins, setCoins);
   return (
     <div className="filter-block">
       <input
@@ -25,4 +22,4 @@ const FilterBlock = ({ coins, setCoins }) => {
     </div>
   );
 };
-export default FilterBlock;
+export default React.memo(FilterBlock);
