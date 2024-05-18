@@ -1,0 +1,27 @@
+.price-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 80%;
+}
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.item-text {
+  font-size: 18px;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  padding: 10px 20px;
+  background-color: aliceblue;
+  border-radius: 20px;
+}

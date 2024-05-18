@@ -1,9 +1,10 @@
 .coins-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 15px;
   width: 100%;
-  padding-top: 20px;
+  padding: 20px;
+  margin-bottom: 30px;
 }
 
 .coin-item {
@@ -15,6 +16,10 @@
   background-color: aliceblue;
   border-radius: 12px;
   gap: 12px;
+  transition: transform 0.5s ease-in-out;
+}
+.coin-item:hover {
+  transform: scale(1.05);
 }
 
 .coin-item__logo {
