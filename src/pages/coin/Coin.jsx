@@ -6,7 +6,7 @@ import CoinInfo from "../../components/CoinInfo/CoinInfo";
 import CoinPriceList from "../../components/CoinPriceList/CoinPriceList";
 import { CoinsContext } from "../../context/coinsContext";
 
-const Coin = ({ balance, setBalance, setWallet }) => {
+const Coin = ({ balance, setBalance, setWallet, wallet }) => {
   const { coins } = useContext(CoinsContext);
   const [coinInfo, setCoinInfo] = useState({});
   const params = useParams();
@@ -16,7 +16,6 @@ const Coin = ({ balance, setBalance, setWallet }) => {
     });
     setCoinInfo(coinInfo);
   }, [coins]);
-  console.log(coinInfo);
   return (
     <div className={styles["coin-page"]}>
       <Card name="Vlad Petlyuk" balance={balance} setBalance={setBalance} />
@@ -28,6 +27,7 @@ const Coin = ({ balance, setBalance, setWallet }) => {
         setBalance={setBalance}
         balance={balance}
         setWallet={setWallet}
+        wallet={wallet}
       />
       <CoinPriceList priceList={coinInfo.sparkline} />
     </div>

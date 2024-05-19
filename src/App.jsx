@@ -45,6 +45,7 @@ function App() {
                   balance={balance}
                   setBalance={setBalance}
                   setWallet={setUserWallet}
+                  wallet={userWallet}
                 />
               }
               loader={({ params }) => {

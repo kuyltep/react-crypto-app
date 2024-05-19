@@ -1,5 +1,50 @@
+import { useState } from "react";
 import styles from "./styles.module.css";
-const CoinInfo = ({ rank, imageUrl, price, name }) => {
+import Toaster from "../toaster/Toaster";
+const CoinInfo = ({
+  rank,
+  imageUrl,
+  price,
+  name,
+  setBalance,
+  balance,
+  setWallet,
+  wallet,
+}) => {
+  function buyCoin() {
+    console.log("BUY");
+    if ((+price).toFixed(2) <= balance) {
+      console.log("MORE BUY");
+      wallet[name] ? (wallet[name] += 1) : (wallet[name] = 1);
+      setWallet(wallet);
+      setBalance((prev) => prev - (+price).toFixed(2));
+      Toaster(
+        {
+          title: "Success buy!",
+          text: "Excellent, now you have plus one coin in your wallet",
+        },
+        {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "colored",
+        },
+        "success"
+      );
+    } else {
+      Toaster(
+        {
+          title: "Error buy!",
+          text: "You don't have money to buy this coin",
+        },
+        {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "colored",
+        },
+        "error"
+      );
+    }
+  }
   return (
     <>
       <div className={styles["coin-info"]}>
@@ -15,7 +60,9 @@ const CoinInfo = ({ rank, imageUrl, price, name }) => {
         </div>
       </div>
       <div>
-        <button className={styles["info-btn"]}>Buy {name}</button>
+        <button onClick={buyCoin} className={styles["info-btn"]}>
+          Buy {name}
+        </button>
       </div>
     </>
   );
