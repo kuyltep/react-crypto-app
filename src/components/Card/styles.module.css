@@ -22,3 +22,7 @@
   background: rgb(183, 159, 21);
   color: white;
 }
+
+.card-button:focus {
+  border: none;
+}
