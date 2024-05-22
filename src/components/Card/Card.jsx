@@ -14,7 +14,7 @@ const Card = ({ balance, name, setBalance, ruBalance }) => {
       </div>
       <div className={styles["card-block"]}>
         <p>{name}</p>
-        <p>{balance}$</p>
+        <p>{balance.toFixed(2)}$</p>
       </div>
     </div>
   );
