@@ -1,0 +1,75 @@
+.coins-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 90%;
+}
+.coin-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  background-color: aliceblue;
+  border-radius: 12px;
+  gap: 12px;
+  transition: transform 0.5s ease-in-out;
+}
+.coin-item:hover {
+  transform: scale(1.05);
+}
+
+.coin-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.coin-img {
+  width: 50px;
+  height: 50px;
+}
+
+.coin-name,
+.coin-count,
+.coin-price {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.buttons-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.button-buy {
+  font-size: 18px;
+  font-weight: 600;
+  background-color: greenyellow;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 25px;
+  transition: transform 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.button-sale {
+  font-size: 18px;
+  font-weight: 600;
+  background-color: rgba(255, 0, 0, 0.503);
+  border: none;
+  border-radius: 15px;
+  padding: 10px 25px;
+  transition: transform 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.button-buy:hover,
+.button-sale:hover {
+  transform: scale(1.05);
+}

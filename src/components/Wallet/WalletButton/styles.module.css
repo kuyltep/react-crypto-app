@@ -1,0 +1,28 @@
+.wallet-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.wallet-button {
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  background-color: gold;
+  transition: transform 0.4s ease-in-out;
+}
+.wallet-button::after {
+  height: 20px;
+  object-fit: contain;
+  width: 20px;
+  content: url("/wallet.png");
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.wallet-button:hover {
+  transform: scale(1.05);
+}
