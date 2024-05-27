@@ -18,3 +18,12 @@
   outline: none;
   border: none;
 }
+
+.filter-select {
+  border-radius: 12px;
+  border: none;
+}
+.filter-select:focus {
+  border: none;
+  outline: none;
+}
