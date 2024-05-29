@@ -9,7 +9,7 @@ export const getCoins = async () => {
     },
   };
   try {
-    const response = await axios.get(url, options);
+    const response = await axios.get(url + "/coins", options);
     return response.data.data;
   } catch (error) {
     console.log(error);
