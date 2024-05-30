@@ -13,16 +13,18 @@ export const api = createApi({
           "x-access-token": key,
         },
       }),
+      transformResponse: (response) => response.data.coins,
     }),
     getCoinByUuid: build.query({
       query: ({ id, time }) => ({
-        url: `/coin/${id}?timePeriod=${time ? time : "24h"}`,
+        url: `/coi/${id}?timePeriod=${time ? time : "24h"}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           "x-access-token": key,
         },
       }),
+      transformResponse: (response) => response.data.coin,
     }),
     getCoinPriceByUuid: build.query({
       query: ({ id, time }) => ({
@@ -33,6 +35,7 @@ export const api = createApi({
           "x-access-token": key,
         },
       }),
+      transformResponse: (response) => response.data.history,
     }),
   }),
 });
