@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Card from "../../components/Card/Card";
 import CoinsList from "../../components/CoinsList/CoinsList";
 import FilterBlock from "../../components/FilterBlock/FilterBlock";
@@ -6,18 +7,19 @@ import Toaster from "../../components/toaster/Toaster";
 import WalletButton from "../../components/Wallet/WalletButton/WalletButton";
 import { useGetCoinsQuery } from "../../service/api";
 import styles from "./styles.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilteredCoins } from "../../store/slices/filteredCoinsSlice";
 
-const Main = ({ balance, setBalance, coins, setCoins }) => {
-  // const filterExpensiveCoins = () => {
-  //   console.log("--func work");
-  //   return filteredCoins.filter((coin) => coin.price > 1000);
-  // };
-  // const expensiveCoins = useMemo(() => filterExpensiveCoins(), [filteredCoins]);
-  const { data, isLoading, isError } = useGetCoinsQuery();
-  // console.log(data);
+const Main = () => {
+  const dispatch = useDispatch();
+  const { isLoading, isError } = useGetCoinsQuery();
+  const coinsState = useSelector((state) => state.coins.coins);
+  useEffect(() => {
+    dispatch(setFilteredCoins(coinsState));
+  }, [dispatch, coinsState]);
   return (
     <main className={styles.main}>
-      <Card balance={balance} name={"Vlad Petlyuk"} setBalance={setBalance} />
+      <Card />
       <WalletButton />
       <FilterBlock setCoins={setCoins} />
       {isLoading && !isError ? (
