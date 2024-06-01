@@ -7,20 +7,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Coin from "./pages/coin/Coin";
 import NotFound from "./pages/not-found/NotFound";
 import Wallet from "./pages/wallet/Wallet";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCoins } from "./store/slices/coinsSlice";
 
 function App() {
   const [userWallet, setUserWallet] = useState({});
   const [balance, setBalance] = useState(50000);
   const [coins, setCoins] = useState([]);
   const [filteredCoins, setFilteredCoins] = useState([]);
+  const coinsState = useSelector((state) => state.coins.coins);
   useEffect(() => {
-    const fetchData = async () => {
-      const coinsData = await getCoins();
-      setCoins(coinsData.coins);
-      setFilteredCoins(coinsData.coins);
-    };
-    fetchData();
-  }, []);
+    setCoins(coinsState);
+    setFilteredCoins(coinsState);
+  }, [coinsState]);
+
   return (
     <>
       <CoinsContext.Provider value={{ coins, filteredCoins }}>

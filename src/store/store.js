@@ -6,7 +6,7 @@ import coinsSlice from "./slices/coinsSlice";
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
-    coinsSlice: coinsSlice,
+    coins: coinsSlice,
     filteredCoins: filteredCoinsSlice,
   },
   middleware: (getDefaultMiddleware) =>
