@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const coinSlice = createSlice({
+const coinSlice = createSlice({
   name: "coin",
   initialState: {
     coins: [],
     coin: {},
   },
   reducers: {
-    setCoins: (state, payload) => {
-      state.coins = payload;
+    setCoins: (state, action) => {
+      state.coins = action.payload;
     },
-    setCoin: (state, payload) => {
-      state.coin = payload;
+    setCoin: (state, action) => {
+      state.coin = action.payload;
     },
   },
 });

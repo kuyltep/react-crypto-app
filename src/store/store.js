@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { api } from "../service/api";
-import { coinSlice } from "./slices/coinsSlice";
+import filteredCoinsSlice from "./slices/filteredCoinsSlice";
+import coinsSlice from "./slices/coinsSlice";
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
-    coin: coinSlice,
+    coinsSlice: coinsSlice,
+    filteredCoins: filteredCoinsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
