@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-const useFilteredCoins = (coins, setCoins) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setFilteredCoins } from "../../store/slices/filteredCoinsSlice";
+const useFilteredCoins = () => {
+  const filteredCoinsDispatch = useDispatch();
+  const { coins } = useSelector((state) => state.coins);
   const [value, setValue] = useState("");
   useEffect(() => {
     const filteredCoins = coins.filter((coin) =>
       coin.name.toLowerCase().includes(value.toLowerCase())
     );
-    setCoins(filteredCoins);
+    filteredCoinsDispatch(setFilteredCoins(filteredCoins));
   }, [value]);
   return { value, setValue };
 };

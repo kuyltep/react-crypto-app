@@ -21,7 +21,7 @@ const Main = () => {
     <main className={styles.main}>
       <Card />
       <WalletButton />
-      <FilterBlock setCoins={setCoins} />
+      <FilterBlock />
       {isLoading && !isError ? (
         <Loading type={"bubbles"} color={"black"} />
       ) : (

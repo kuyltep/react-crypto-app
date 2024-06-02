@@ -1,21 +1,22 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 import "./styles.css";
-import { CoinsContext } from "../../context/coinsContext";
 import { Link } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { createRef } from "react";
 const CoinsList = () => {
-  const coinsContext = useContext(CoinsContext);
-  const { filteredCoins } = coinsContext;
+  const { filteredCoins } = useSelector((state) => state.filteredCoins);
   return (
     <TransitionGroup component={"ul"} className="coins-list">
       {filteredCoins.map((coin) => {
+        const nodeRef = createRef(coin.uuid);
         return (
           <CSSTransition
             key={coin.uuid}
-            timeout={500}
             classNames="coin-animate"
+            nodeRef={nodeRef}
+            timeout={1000}
           >
-            <Link to={"coins/" + coin.symbol}>
+            <Link to={"coins/" + coin.symbol} ref={nodeRef}>
               <li className="coin-item">
                 <div className="coin-item__info">
                   <img

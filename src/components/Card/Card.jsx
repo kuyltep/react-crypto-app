@@ -12,7 +12,7 @@ const Card = () =>
         <div className={styles["card-block"]}>
           <p>CRYPTO FINANCE</p>
           <button
-            onClick={dispatch(setBalance(1000))}
+            onClick={() => dispatch(setBalance(1000))}
             className={styles["card-button"]}
           >
             Add money
