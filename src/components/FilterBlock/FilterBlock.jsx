@@ -1,11 +1,39 @@
 import React, { useEffect, useState } from "react";
 import "./styles.css";
 import useFilteredCoins from "../../helpers/hooks/useFilteredCoins";
+import { useDispatch } from "react-redux";
+import {
+  filterCoinsByName,
+  filterCoinsByPriceDown,
+  filterCoinsByPriceUp,
+  filterCoinsByRaiting,
+  filterCoinsBySearch,
+} from "../../store/slices/filteredCoinsSlice";
 
 const FilterBlock = () => {
+  const dispatch = useDispatch();
   const { value, setValue } = useFilteredCoins();
   const [optionValue, setOptionValue] = useState("raiting");
-  useEffect(() => {}, [optionValue]);
+  useEffect(() => {
+    switch (optionValue) {
+      case "raiting":
+        dispatch(filterCoinsByRaiting());
+        break;
+      case "name":
+        dispatch(filterCoinsByName());
+        break;
+      case "priceUp":
+        dispatch(filterCoinsByPriceUp());
+        break;
+      case "priceDown":
+        dispatch(filterCoinsByPriceDown());
+        break;
+    }
+  }, [optionValue]);
+
+  useEffect(() => {
+    dispatch(filterCoinsBySearch(value));
+  }, [value]);
 
   return (
     <div className="filter-block">

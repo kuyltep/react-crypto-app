@@ -6,9 +6,6 @@ import NotFound from "./pages/not-found/NotFound";
 import Wallet from "./pages/wallet/Wallet";
 
 function App() {
-  // const [userWallet, setUserWallet] = useState({});
-  // const [balance, setBalance] = useState(50000);
-
   return (
     <>
       <Header />

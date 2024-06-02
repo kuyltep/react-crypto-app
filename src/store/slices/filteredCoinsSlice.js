@@ -9,10 +9,16 @@ const filteredCoinsSlice = createSlice({
     setFilteredCoins: (state, action) => {
       state.filteredCoins = action.payload;
     },
+    filterCoinsBySearch: (state, action) => {
+      const filteredCoins = state.filteredCoins.filter((coin) =>
+        coin.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
+      state.filteredCoins = filteredCoins;
+    },
     filterCoinsByName: (state) => {
       const filteredCoins = state.filteredCoins
         .filter((coin) => coin.name)
-        .sort((coin1, coin2) => coin1.name.localCompare(coin2.name));
+        .sort((coin1, coin2) => coin1.name.localeCompare(coin2.name));
       state.filteredCoins = filteredCoins;
     },
     filterCoinsByPriceUp: (state) => {
@@ -41,6 +47,7 @@ export const {
   filterCoinsByPriceDown,
   filterCoinsByPriceUp,
   filterCoinsByRaiting,
+  filterCoinsBySearch,
 } = filteredCoinsSlice.actions;
 
 export default filteredCoinsSlice.reducer;
