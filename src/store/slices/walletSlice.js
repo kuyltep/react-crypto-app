@@ -5,6 +5,7 @@ const walletSlice = createSlice({
   initialState: {
     wallet: {},
     balance: 50000,
+    name: "Vlad Petlyuk",
   },
   reducers: {
     setBalance: (state, action) => {
