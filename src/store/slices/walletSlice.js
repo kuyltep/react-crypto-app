@@ -49,10 +49,21 @@ const walletSlice = createSlice({
       }
     },
     saleCoinFromWallet: (state, action) => {
-      if (state.wallet[action.payload.name]?.counter > 0) {
-        state.balance += action.payload.price;
+      if (state.wallet[action.payload.name].counter > 0) {
+        state.balance += +action.payload.price;
+        state.wallet[action.payload.name].counter -= 1;
       }
-      state.wallet[action.payload.name].counter -= 1;
+      Toaster(
+        {
+          title: "Sale coin",
+        },
+        {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "colored",
+        },
+        "info"
+      );
     },
   },
 });

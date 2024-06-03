@@ -1,57 +1,19 @@
-import Toaster from "../../toaster/Toaster";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./styles.module.css";
+import {
+  addCoinInWallet,
+  saleCoinFromWallet,
+} from "../../../store/slices/walletSlice";
 //ConorMcgregor  я полность консослидирую свое состояние но я больше не могу раотать один ребяат пожалуста проявите хоть какуюто активность
-const WalletCoinsList = ({
-  wallet,
-  setWallet,
-  coinsList,
-  balance,
-  setBalance,
-}) => {
-  const buyCoin = (coinItem) => {
-    if (balance >= +coinItem.price) {
-      setBalance((prev) => prev - +coinItem.price);
-      wallet[coinItem.name]
-        ? (wallet[coinItem.name] += 1)
-        : (wallet[coinItem.name] = 1);
-      setWallet(wallet);
-      Toaster(
-        {
-          title: "Success buy!",
-          text: "Excellent, now you have plus one coin in your wallet",
-        },
-        {
-          position: "top-right",
-          autoClose: 5000,
-          theme: "colored",
-        },
-        "success"
-      );
-    }
-  };
-  const saleCoin = (coinItem) => {
-    if (wallet[coinItem.name] > 0) {
-      setBalance((prev) => prev + +coinItem.price);
-      wallet[coinItem.name] -= 1;
-      setWallet(wallet);
-      Toaster(
-        {
-          title: "Success sale!",
-          text: "Excellent, now you have minus one coin in your wallet",
-        },
-        {
-          position: "top-right",
-          autoClose: 5000,
-          theme: "colored",
-        },
-        "info"
-      );
-    }
-  };
+const WalletCoinsList = () => {
+  const disptach = useDispatch();
+  const { wallet } = useSelector((state) => state.wallet);
+  const walletKeys = Object.keys(wallet);
   return (
     <ul className={styles["coins-list"]}>
-      {coinsList.map((coinItem, index) => {
-        return wallet[coinItem.name] ? (
+      {walletKeys.map((name, index) => {
+        const coinItem = wallet[name];
+        return coinItem.counter > 0 ? (
           <li className={styles["coin-item"]} key={index}>
             <div className={styles["coin-section"]}>
               <img
@@ -62,15 +24,12 @@ const WalletCoinsList = ({
               <p className={styles["coin-name"]}>{coinItem.symbol}</p>
             </div>
             <div className={styles["price-section"]}>
-              <p className={styles["coin-count"]}>
-                Count: {wallet[coinItem.name]}
-              </p>
+              <p className={styles["coin-count"]}>Count: {coinItem.counter}</p>
               <p className={styles["coin-price"]}>
                 Price: {(+coinItem.price).toFixed(2)}$
               </p>
               <p className={styles["coin-price"]}>
-                Total Price:{" "}
-                {(+coinItem.price * +wallet[coinItem.name]).toFixed(2)}$
+                Total Price: {(+coinItem.price * +coinItem.counter).toFixed(2)}$
               </p>
             </div>
             <div className={styles["buttons-section"]}>
@@ -78,7 +37,7 @@ const WalletCoinsList = ({
                 className={styles["button-buy"]}
                 onClick={(e) => {
                   e.stopPropagation();
-                  buyCoin(coinItem);
+                  disptach(addCoinInWallet(coinItem));
                 }}
               >
                 BUY
@@ -87,16 +46,14 @@ const WalletCoinsList = ({
                 className={styles["button-sale"]}
                 onClick={(e) => {
                   e.stopPropagation();
-                  saleCoin(coinItem);
+                  disptach(saleCoinFromWallet(coinItem));
                 }}
               >
                 SALE
               </button>
             </div>
           </li>
-        ) : (
-          <></>
-        );
+        ) : null;
       })}
     </ul>
   );
