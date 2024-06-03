@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import Toaster from "../../components/toaster/Toaster";
 const walletSlice = createSlice({
   name: "wallet",
   initialState: {
@@ -13,12 +13,39 @@ const walletSlice = createSlice({
     },
     addCoinInWallet: (state, action) => {
       if (state.balance >= +action.payload.price) {
-        if (state.wallet[action.payload.name]?.counter) {
+        if (state.wallet[action.payload.name]) {
           state.wallet[action.payload.name].counter += 1;
+          console.log("add counter");
         } else {
-          state.wallet[action.payload.name] = action.payload;
+          console.log("new coin");
+          state.wallet[action.payload.name] = { ...action.payload, counter: 1 };
         }
         state.balance -= +action.payload.price;
+        Toaster(
+          {
+            title: "Success buy!",
+            text: "Excellent, now you have plus one coin in your wallet",
+          },
+          {
+            position: "top-right",
+            autoClose: 5000,
+            theme: "colored",
+          },
+          "success"
+        );
+      } else {
+        Toaster(
+          {
+            title: "Error buy!",
+            text: "You don't have money to buy this coin",
+          },
+          {
+            position: "top-right",
+            autoClose: 5000,
+            theme: "colored",
+          },
+          "error"
+        );
       }
     },
     saleCoinFromWallet: (state, action) => {

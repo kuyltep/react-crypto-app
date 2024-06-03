@@ -11,14 +11,21 @@ const coinSlice = createSlice({
   initialState: {
     coins: [],
     coin: {},
+    coinSymbol: "",
     coinPrices: [],
   },
   reducers: {
     setCoins: (state, action) => {
       state.coins = action.payload;
     },
-    setCoin: (state, action) => {
-      state.coin = action.payload;
+    findAndSetCoin: (state, action) => {
+      const coin = state.coins.find((coin) => {
+        return coin.symbol === action.payload;
+      });
+      state.coin = coin;
+    },
+    setCoinSymbol: (state, action) => {
+      state.coinSymbol = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -31,7 +38,7 @@ const coinSlice = createSlice({
     builder.addMatcher(
       api.endpoints.getCoinByUuid.matchFulfilled,
       (state, action) => {
-        state.coins = action.payload;
+        state.coin = action.payload;
       }
     );
     builder.addMatcher(
@@ -42,6 +49,6 @@ const coinSlice = createSlice({
     );
   },
 });
-export const { setCoin, setCoins } = coinSlice.actions;
+export const { findAndSetCoin, setCoins, setCoinSymbol } = coinSlice.actions;
 
 export default coinSlice.reducer;

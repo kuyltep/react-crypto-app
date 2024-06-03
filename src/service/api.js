@@ -17,7 +17,7 @@ export const api = createApi({
     }),
     getCoinByUuid: build.query({
       query: ({ id, time }) => ({
-        url: `/coi/${id}?timePeriod=${time ? time : "24h"}`,
+        url: `/coin/${id}?timePeriod=${time ? time : "24h"}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
