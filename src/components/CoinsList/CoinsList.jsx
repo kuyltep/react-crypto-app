@@ -16,7 +16,7 @@ const CoinsList = () => {
             nodeRef={nodeRef}
             timeout={1000}
           >
-            <Link to={"coins/" + coin.symbol} ref={nodeRef}>
+            <Link to={"coins/" + coin.uuid} ref={nodeRef}>
               <li className="coin-item">
                 <div className="coin-item__info">
                   <img

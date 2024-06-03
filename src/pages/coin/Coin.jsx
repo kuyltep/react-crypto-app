@@ -1,36 +1,39 @@
 import { useParams } from "react-router-dom";
 import Card from "../../components/Card/Card";
 import styles from "./styles.module.css";
-import React, { useContext, useMemo, useState } from "react";
 import CoinInfo from "../../components/CoinInfo/CoinInfo";
 import CoinPriceList from "../../components/CoinPriceList/CoinPriceList";
-import { CoinsContext } from "../../context/coinsContext";
-
-const Coin = ({ balance, setBalance, setWallet, wallet }) => {
-  const { coins } = useContext(CoinsContext);
-  const [coinInfo, setCoinInfo] = useState({});
+import { useGetCoinByUuidQuery } from "../../service/api";
+import Loading from "../../components/Loading/Loading";
+import Toaster from "../../components/toaster/Toaster";
+const Coin = () => {
   const params = useParams();
-  useMemo(() => {
-    const coinInfo = coins.find((coin) => {
-      return coin.symbol === params.coin;
-    });
-    setCoinInfo(coinInfo);
-  }, [coins]);
+  const { isLoading, isError } = useGetCoinByUuidQuery({ id: params.coin });
   return (
     <div className={styles["coin-page"]}>
-      <Card name="Vlad Petlyuk" balance={balance} setBalance={setBalance} />
-      <CoinInfo
-        imageUrl={coinInfo.iconUrl}
-        name={coinInfo.name}
-        price={coinInfo.price}
-        rank={coinInfo.rank}
-        setBalance={setBalance}
-        balance={balance}
-        setWallet={setWallet}
-        wallet={wallet}
-      />
-      <CoinPriceList priceList={coinInfo.sparkline} />
+      <Card />
+      {isLoading && !isError ? (
+        <Loading type={"bubbles"} color={"black"} />
+      ) : isError ? (
+        Toaster(
+          {
+            title: "Error in load coin info",
+          },
+          {
+            position: "top-right",
+            autoClose: 5000,
+            theme: "colored",
+          },
+          "error"
+        )
+      ) : (
+        <>
+          <CoinInfo />
+        </>
+      )}
+
+      {/* <CoinPriceList /> */}
     </div>
   );
 };
-export default React.memo(Coin);
+export default Coin;
