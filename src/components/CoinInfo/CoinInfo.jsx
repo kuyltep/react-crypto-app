@@ -5,7 +5,6 @@ const CoinInfo = () => {
   const { coin } = useSelector((state) => state.coins);
   const { rank, iconUrl, name, price } = coin;
   const dispatch = useDispatch();
-  console.log(coin);
   return (
     <>
       <div className={styles["coin-info"]}>

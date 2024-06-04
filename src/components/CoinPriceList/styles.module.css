@@ -26,3 +26,9 @@
   background-color: aliceblue;
   border-radius: 20px;
 }
+
+.price-chart,
+.coin-chart {
+  overflow-x: scroll;
+  width: 100%;
+}
