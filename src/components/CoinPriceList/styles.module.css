@@ -30,5 +30,22 @@
 .price-chart,
 .coin-chart {
   overflow-x: scroll;
+  overflow-y: hidden;
   width: 100%;
+}
+
+.time-select {
+  border: none;
+  outline: none;
+  padding: 10px 25px;
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px;
+  font-size: 14px;
+}
+.time-select > option {
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.time-select > option :hover {
+  background-color: antiquewhite;
 }

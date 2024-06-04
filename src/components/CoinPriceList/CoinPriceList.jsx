@@ -1,21 +1,19 @@
-import {
-  Line,
-  LineChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
+import { Line, LineChart, CartesianGrid, YAxis, Tooltip } from "recharts";
 import styles from "./styles.module.css";
 import { useSelector } from "react-redux";
-
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useGetCoinPriceByUuidQuery } from "../../service/api";
 const CoinPriceList = () => {
+  const params = useParams();
+  const [timeValue, setTimeValue] = useState("1h");
+  useGetCoinPriceByUuidQuery({ id: params.coin, time: timeValue });
   const { coinPrices } = useSelector((state) => state.coins);
   const updatedPrices = [...coinPrices].reverse();
   const renderLineChart = (
     <LineChart
       width={1500}
-      height={1500}
+      height={2000}
       className={styles["coin-chart"]}
       data={updatedPrices}
     >
@@ -27,7 +25,6 @@ const CoinPriceList = () => {
         color="black"
       />
       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      {/* <XAxis dataKey="timestamp" /> */}
       <YAxis />
       <Tooltip />
     </LineChart>
@@ -35,7 +32,13 @@ const CoinPriceList = () => {
   return (
     <>
       <h3 className={styles["title"]}>Price chart</h3>
-      <select name="time" id="" defaultValue={"1h"}>
+      <select
+        className={styles["time-select"]}
+        name="time"
+        id=""
+        value={timeValue}
+        onChange={(e) => setTimeValue(e.target.value)}
+      >
         <option value="1h">1 hour</option>
         <option value="3h">3 hours</option>
         <option value="12h">12 hours</option>

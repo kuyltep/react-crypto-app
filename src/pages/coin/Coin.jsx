@@ -3,16 +3,12 @@ import Card from "../../components/Card/Card";
 import styles from "./styles.module.css";
 import CoinInfo from "../../components/CoinInfo/CoinInfo";
 import CoinPriceList from "../../components/CoinPriceList/CoinPriceList";
-import {
-  useGetCoinByUuidQuery,
-  useGetCoinPriceByUuidQuery,
-} from "../../service/api";
+import { useGetCoinByUuidQuery } from "../../service/api";
 import Loading from "../../components/Loading/Loading";
 import Toaster from "../../components/toaster/Toaster";
 const Coin = () => {
   const params = useParams();
   const { isLoading, isError } = useGetCoinByUuidQuery({ id: params.coin });
-  useGetCoinPriceByUuidQuery({ id: params.coin, time: "1y" });
   return (
     <div className={styles["coin-page"]}>
       <Card />
